@@ -7,6 +7,20 @@
         "name": {
             "name": "Name",
             "type": "text"
-        }   
+        },
+        "number": {
+            "name": "Number",
+            "type": "number",
+            "subType": "integer"
+        },
+        "relative": {
+            "name": "Relative",
+            "type": "number",
+            "subType": "integer"
+        },
+        "dates": {
+            "name": "Dates",
+            "type": "text",
+            "subType": "date-range"
     }
 }
