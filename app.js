@@ -111,7 +111,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
           const types = type.toLowerCase() + 's'
           let d = s.startOf(type).setLocale(lang)
           const startOfThis = n.startOf(type);
-          item.scratch1 = item.id;
+          
           item.scratch2 = n.toFormat("yyyy/MM/dd hh:mm") + " " + startOfThis.toFormat("yyyy/MM/dd hh:mm");   
             
           //console.log(d)
@@ -201,7 +201,8 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             item.id = uuid(JSON.stringify(i.toFormat('yyyy/MM/dd')));
             item.previous = prevID;
             prevID = item.id
-                        
+            
+            item.scratch1 = item.id;
               
             items.push(item)
 
