@@ -1,8 +1,8 @@
 {
-  "id": "dates-app",
-  "name": "Dates",
+  "id": "period-app",
+  "name": "Period",
   "version": "1.0.0",
-  "description": "Augment date information in Fibery",
+  "description": "Use date periods with more granularity",
   "authentication": [
     {
       "id": "public",
