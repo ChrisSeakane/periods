@@ -101,7 +101,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
 
     if (requestedType == `period`){
         //const timezone = 'Europe/Copenhagen'
-        const lang = 'da-DK'
+        const lang = 'en'
         const start = yearRange[0] + '/01/01'
         const end = yearRange[0] + '/12/31'
         //let s = DateTime.fromFormat(start, 'yyyy/MM/dd');
