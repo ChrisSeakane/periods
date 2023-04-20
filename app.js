@@ -147,14 +147,14 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             function isInType(arrayOfTypes,arrayToFill,interval) {
               let matchType = arrayOfTypes.pop()
               if (type !== matchType) {
-                let matchS = JSON.stringify(Interval.fromDateTimes(interval.start.startOf(matchType),interval.start.endOf(matchType)).toFormat('yyyy/MM/dd'));
+                let matchS = uuid(JSON.stringify(Interval.fromDateTimes(interval.start.startOf(matchType),interval.start.endOf(matchType)).toFormat('yyyy/MM/dd')));
                 if(arrayToFill.indexOf(matchS) === -1) {
-                  arrayToFill.push(uuid(matchS));
+                  arrayToFill.push(matchS);
                 }
-                let matchE = JSON.stringify(Interval.fromDateTimes(interval.end.startOf(matchType),interval.end.endOf(matchType)).toFormat('yyyy/MM/dd'));
+                let matchE = uuid(JSON.stringify(Interval.fromDateTimes(interval.end.startOf(matchType),interval.end.endOf(matchType)).toFormat('yyyy/MM/dd')));
 
                 if(arrayToFill.indexOf(matchE) === -1) {
-                  arrayToFill.push(uuid(matchE));
+                  arrayToFill.push(matchE);
                 } 
 
                 if(arrayOfTypes.length >0) {
