@@ -178,7 +178,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             prevID = item.id
               
             item.scratch1 = item.id;
-            item.scratch2 = item.is_in;
+            item.scratch2 = item.previous;
             
             items.push(item)
 
