@@ -8,6 +8,11 @@
             "name": "Name",
             "type": "text"
         },
+        "dates": {
+            "name": "Dates",
+            "type": "text",
+            "subType": "date-range"
+        },
         "type": {
             "name": "Type",
             "type": "text",
