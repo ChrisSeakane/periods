@@ -127,7 +127,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
               break
               case 'Month':
                 item.number = d.month
-                item.name = d.year + "M" + d.month.toString().padStart(2,'0') +  " " + d.monthShort + ""
+                item.name = d.toFormat('yyyy/MM') +  " " + d.monthShort
               break
               case 'Quarter':
                 item.number = d.quarter
@@ -183,10 +183,6 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             i = Interval.fromDateTimes(d,d.endOf(type))
           }
         });
-        
-        let dummyName = "Hello";
-        
-        //items = [{id:uuid(JSON.stringify(dummyName)),name:dummyName}]
         
         return res.json({items});
     }
