@@ -98,8 +98,13 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         const lang = 'da-DK'
         const start = yearRange[0] + '/01/01'
         const end = yearRange[0] + '/12/31'
-        let s = DateTime.fromFormat(start, 'yyyy/MM/dd');
-        let e = DateTime.fromFormat(end, 'yyyy/MM/dd');
+        //let s = DateTime.fromFormat(start, 'yyyy/MM/dd');
+        //let e = DateTime.fromFormat(end, 'yyyy/MM/dd');
+        //const n = DateTime.local({zone:timezone});
+        
+        let s = DateTime.fromFormat(start, 'yyyy/MM/dd').setZone(timezone);
+        //console.log(s)
+        let e = DateTime.fromFormat(end, 'yyyy/MM/dd').setZone(timezone);
         const n = DateTime.local({zone:timezone});
 
         const choices = ['Day','Week','Month','Quarter','Year']
