@@ -103,7 +103,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
           while(i.isBefore(e.plus({[types]:1}))){
             let item ={}
             item.type = type
-            item.dates = i.start.toFormat('yyyy-MM-dd')+","+i.end.toFormat('yyyy-MM-dd')
+            item.dates = i.start.toFormat('yyyy/MM/dd') + " - " + i.end.plus({'days':1}).toFormat('yyyy/MM/dd')
             let relativeStr = d.toRelative({base:startOfThis,unit:types})
             var r = /\d+/;
             const delta = parseInt(relativeStr.match(r),10)
