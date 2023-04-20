@@ -176,6 +176,11 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             item.id = uuid(JSON.stringify(i.toFormat('yyyy/MM/dd')));
             item.previous = prevID;
             prevID = item.id
+              
+            item.scratch1 = item.id;
+            item.scratch2 = item.is_in;
+              
+              
 
             items.push(item)
 
