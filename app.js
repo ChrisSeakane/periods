@@ -100,7 +100,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         const end = yearRange[0] + '/12/31'
         let s = DateTime.fromFormat(start, 'yyyy/MM/dd');
         let e = DateTime.fromFormat(end, 'yyyy/MM/dd');
-        const n = DateTime.now(timezone);
+        const n = DateTime.local({zone:timezone});
 
         const choices = ['Day','Week','Month','Quarter','Year']
 
@@ -112,7 +112,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
           let d = s.startOf(type).setLocale(lang)
           const startOfThis = n.startOf(type);
           item.scratch1 = item.id;
-          item.scratch2 = n.toFormat("yyyy/MM/dd hh:mm") + " " + startOfThis.toFormat("yyyy/MM/dd hh:mm");   
+          item.scratch2 = n.toFormat("yyyy/MM/dd HH:MM") + " " + startOfThis.toFormat("yyyy/MM/dd HH:MM");   
             
           //console.log(d)
           let i = Interval.fromDateTimes(d,d.endOf(type))
