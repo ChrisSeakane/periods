@@ -8,6 +8,11 @@
             "name": "Name",
             "type": "text"
         },
+        "type": {
+            "name": "Type",
+            "type": "text",
+            "subType": "single-select"
+        },
         "number": {
             "name": "Number",
             "type": "number",
