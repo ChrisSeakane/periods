@@ -23,11 +23,6 @@
             "type": "number",
             "subType": "integer"
         },
-        "dates": {
-            "name": "Dates",
-            "type": "text",
-            "subType": "date-range"
-        },
         "is_in": {
             "name": "Is in ",
             "type": "text",
