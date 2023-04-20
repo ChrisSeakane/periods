@@ -27,6 +27,17 @@
             "name": "Dates",
             "type": "text",
             "subType": "date-range"
+        },
+        "is_in": {
+            "name": "Is in ",
+            "type": "text",
+            "relation": {
+                "cardinality": "many-to-many",
+                "name": "Is in",
+                "targetName": "Contains",
+                "targetType": "period",
+                "targetFieldId": "id"
+            }
         }
     }
 }
