@@ -102,46 +102,46 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
 
           while(i.isBefore(e.plus({[types]:1}))){
             let item ={}
-            item.Type = type
-            item.Dates = i.toFormat('yyyy/MM/dd')
+            item.type = type
+            item.dates = i.toFormat('yyyy/MM/dd')
             let relativeStr = d.toRelative({base:startOfThis,unit:types})
             var r = /\d+/;
             const delta = parseInt(relativeStr.match(r),10)
             if (d< startOfThis){
-              item.Relative = 0-delta
+              item.relative = 0-delta
             }
             else {
-              item.Relative = delta
+              item.relative = delta
             }
             let semanticStr = d.toRelativeCalendar({base:startOfThis,unit:types})
-            item.Semantic = semanticStr;
+            item.semantic = semanticStr;
 
             switch (type){
               case 'Day':
-                item.Number = d.ordinal
-                item.Name = d.toFormat('yyyy/MM/dd')
+                item.number = d.ordinal
+                item.name = d.toFormat('yyyy/MM/dd')
               break
               case 'Week':
-                item.Number = d.weekNumber
-                item.Name = d.weekYear + "W" + d.weekNumber.toString().padStart(2,'0')
+                item.number = d.weekNumber
+                item.name = d.weekYear + "W" + d.weekNumber.toString().padStart(2,'0')
               break
               case 'Month':
-                item.Number = d.month
-                item.Name = d.year + "M" + d.month.toString().padStart(2,'0') +  " " + d.monthShort + ""
+                item.number = d.month
+                item.name = d.year + "M" + d.month.toString().padStart(2,'0') +  " " + d.monthShort + ""
               break
               case 'Quarter':
-                item.Number = d.quarter
-                item.Name = d.year + "Q" + d.quarter
+                item.number = d.quarter
+                item.name = d.year + "Q" + d.quarter
               break
               case 'Year':
-                item.Number = d.year
-                item.Name = d.year.toString();
+                item.number = d.year
+                item.name = d.year.toString();
               break
               default:
             }
 
             if (Math.abs(delta)<=1){
-              item.Name = item.Name  + " (" + item.Semantic + ")"
+              item.name = item.name  + " (" + item.Semantic + ")"
             }
 
             function isInType(arrayOfTypes,arrayToFill,interval) {
@@ -171,11 +171,11 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
 
             let isIn = []
 
-            item.IsIn = isInType(matchingTypes,isIn,i);
+            item.is_in = isInType(matchingTypes,isIn,i);
 
-            item.ID = uuid(JSON.stringify(item.Dates));
+            item.id = uuid(JSON.stringify(item.Dates));
             item.Previous = prevID;
-            prevID = item.ID
+            prevID = item.id
 
             items.push(item)
 
@@ -186,7 +186,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         
         let dummyName = "Hello";
         
-        items = [{id:uuid(JSON.stringify(dummyName)),name:dummyName}]
+        //items = [{id:uuid(JSON.stringify(dummyName)),name:dummyName}]
         
         return res.json({items});
     }
