@@ -89,19 +89,13 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     if (requestedType !== `period`) {
         throw new Error(`Only this database can be synchronized`);
     }
-    /*
-    if (_.isEmpty(filter.countries)) {
-        throw new Error(`Countries filter should be specified`);
-    }
-    */
     const {timezone} = filter;
     const yearRange = getYearRange(filter);
-    //var linkID;
-    
+    //var linkID;    
 
     if (requestedType == `period`){
-        const timezone = 'Europe/Copenhagen'
-        const lang = 'en-GB'
+        //const timezone = 'Europe/Copenhagen'
+        const lang = 'da-DK'
         const start = yearRange[0] + '/01/01'
         const end = yearRange[0] + '/12/31'
         let s = DateTime.fromFormat(start, 'yyyy/MM/dd');
