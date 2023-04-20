@@ -1,13 +1,9 @@
 {
   "types": [
     {
-      "id": "date",
-      "name": "Date"
-    },
-    {
-      "id": "week",
-      "name":"Week"
-    }    
+      "id": "period",
+      "name": "Period"
+    }   
   ],
   "filters": [
     {
