@@ -33,6 +33,10 @@
                 "targetType": "period",
                 "targetFieldId": "id"
             }
+        },
+        "scratch": {
+            "name": "Scratch",
+            "type": "text"
         }
     }
 }
