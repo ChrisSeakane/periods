@@ -1,0 +1,35 @@
+{
+  "types": [
+    {
+      "id": "date",
+      "name": "Date"
+    },
+    {
+      "id": "week",
+      "name":"Week"
+    }    
+  ],
+  "filters": [
+    {
+      "id": "timezone",
+      "title": "Timezone (default:UTC)",
+      "datalist": true,
+      "optional": true,
+      "type": "list"
+    },
+    {
+      "id": "from",
+      "type": "number",
+      "title": "Start Year (default: current year)",
+      "optional": true
+    },
+    {
+      "id": "to",
+      "type": "number",
+      "title": "End Year (default: current year)",
+      "optional": true
+    }
+
+  ]
+}
+

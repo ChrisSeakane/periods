@@ -1,0 +1,18 @@
+{
+  "id": "dates-app",
+  "name": "Dates",
+  "version": "1.0.0",
+  "description": "Augment date information in Fibery",
+  "authentication": [
+    {
+      "id": "public",
+      "name": "Public Access",
+      "description": "There is no any authentication required",
+      "fields": []
+    }
+  ],
+  "sources": [],
+  "responsibleFor": {
+    "dataSynchronization": true
+  }
+}
