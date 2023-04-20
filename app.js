@@ -83,6 +83,7 @@ app.post(`/api/v1/synchronizer/datalist`, wrap(async (req, res) => {
     console.log(temp);
     const items = temp.sort((a, b) => (a.title > b.title) ? 1: -1);
     */
+    
     const items = timezones.map((tz) => ({title:tz, value:tz}));
     
     res.json({items});
