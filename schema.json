@@ -34,6 +34,17 @@
                 "targetFieldId": "id"
             }
         },
+        "previous": {
+            "name": "Previous ",
+            "type": "text",
+            "relation": {
+                "cardinality": "one-to-one",
+                "name": "Preivous",
+                "targetName": "Subsequent",
+                "targetType": "period",
+                "targetFieldId": "id"
+            }
+        },
         "scratch1": {
             "name": "Scratch1",
             "type": "text"
