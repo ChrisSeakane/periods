@@ -34,8 +34,12 @@
                 "targetFieldId": "id"
             }
         },
-        "scratch": {
-            "name": "Scratch",
+        "scratch1": {
+            "name": "Scratch1",
+            "type": "text"
+        },
+        "scratch2": {
+            "name": "Scratch2",
             "type": "text"
         }
     }
