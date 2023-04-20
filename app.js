@@ -149,12 +149,12 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
               if (type !== matchType) {
                 let matchS = Interval.fromDateTimes(interval.start.startOf(matchType),interval.start.endOf(matchType)).toFormat('yyyy/MM/dd');
                 if(arrayToFill.indexOf(matchS) === -1) {
-                  arrayToFill.push(matchS);
+                  arrayToFill.push(uuid(JSON.stringify(matchS)));
                 }
                 let matchE = Interval.fromDateTimes(interval.end.startOf(matchType),interval.end.endOf(matchType)).toFormat('yyyy/MM/dd');
 
                 if(arrayToFill.indexOf(matchE) === -1) {
-                  arrayToFill.push(matchE);
+                  arrayToFill.push(uuid(JSON.stringify(matchE)));
                 } 
 
                 if(arrayOfTypes.length >0) {
@@ -173,7 +173,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
 
             item.IsIn = isInType(matchingTypes,isIn,i);
 
-            item.ID = item.Dates;
+            item.ID = uuid(JSON.stringify(item.Dates));
             item.Previous = prevID;
             prevID = item.ID
 
