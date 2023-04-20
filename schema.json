@@ -1,5 +1,5 @@
 {
-    "date": {
+    "period": {
         "id": {
             "name": "Id",
             "type": "id"
@@ -7,39 +7,6 @@
         "name": {
             "name": "Name",
             "type": "text"
-        },
-        "date": {
-            "name": "Date",
-            "type": "date"
-        },
-        "timezone": {
-            "name": "Timezone",
-            "type": "text"
-        },
-        "week": {
-            "name": "WeekLink",
-            "type": "number",
-            "relation": {
-                "cardinality": "many-to-one",
-                "name": "Week",
-                "targetName": "Dates",
-                "targetType": "week",
-                "targetFieldId": "number"
-            }
         }   
-    },
-    "week": {
-        "id": {
-            "name": "Id",
-            "type": "id"
-        },
-        "name": {
-            "name": "Name",
-            "type": "text"
-        },
-        "number": {
-            "name": "Number",
-            "type": "number"
-        } 
     }
 }
