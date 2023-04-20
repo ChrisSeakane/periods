@@ -17,11 +17,6 @@
             "name": "Relative",
             "type": "number",
             "subType": "integer"
-        },
-        "dates": {
-            "name": "Dates",
-            "type": "text",
-            "subType": "date-range"
         }
     }
 }
