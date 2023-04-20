@@ -72,7 +72,9 @@ function getTitle(name) {
 }
 
 app.post(`/api/v1/synchronizer/datalist`, wrap(async (req, res) => {
-
+    const timezones = Intl.supportedValuesOf('timeZone');
+    
+    /*
     let tzs = spacetime().timezones;
     
     let temp = Object.keys(tzs);
@@ -80,6 +82,8 @@ app.post(`/api/v1/synchronizer/datalist`, wrap(async (req, res) => {
     temp = temp.map(getTitle)
     console.log(temp);
     const items = temp.sort((a, b) => (a.title > b.title) ? 1: -1);
+    */
+    const items = timezones.map((tz) => ({title:tz, value:tz}));
     
     res.json({items});
 }));
