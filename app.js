@@ -149,12 +149,12 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
               if (type !== matchType) {
                 let matchS = Interval.fromDateTimes(interval.start.startOf(matchType),interval.start.endOf(matchType)).toFormat('yyyy/MM/dd');
                 if(arrayToFill.indexOf(matchS) === -1) {
-                  arrayToFill.push(uuid(JSON.stringify(matchS)));
+                  arrayToFill.push(uuid(matchS));
                 }
                 let matchE = Interval.fromDateTimes(interval.end.startOf(matchType),interval.end.endOf(matchType)).toFormat('yyyy/MM/dd');
 
                 if(arrayToFill.indexOf(matchE) === -1) {
-                  arrayToFill.push(uuid(JSON.stringify(matchE)));
+                  arrayToFill.push(uuid(matchE));
                 } 
 
                 if(arrayOfTypes.length >0) {
