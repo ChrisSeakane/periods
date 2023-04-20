@@ -78,12 +78,112 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     
 
     if (requestedType == `period`){
-        const items = [];
-        const item = {
-            name: "Week 1"
-        };
-        item.id = uuid(JSON.stringify(item));
-        items.push(item);
+        const timezone = 'Europe/Copenhagen'
+        const lang = 'en-GB'
+        const start = '2023/01/01'
+        const end = '2023/01/28'
+        let s = DateTime.fromFormat(start, 'yyyy/MM/dd');
+        let e = DateTime.fromFormat(end, 'yyyy/MM/dd');
+        const n = DateTime.now(timezone);
+
+        const choices = ['Day','Week','Month','Quarter','Year']
+
+        let items = []
+
+        choices.forEach((type) => {
+          //const type = 'Day';
+          const types = type.toLowerCase() + 's'
+          let d = s.startOf(type).setLocale(lang)
+          const startOfThis = n.startOf(type);
+          //console.log(d)
+          let i = Interval.fromDateTimes(d,d.endOf(type))
+
+          let prevID = ''
+
+          while(i.isBefore(e.plus({[types]:1}))){
+            let item ={}
+            item.Type = type
+            item.Dates = i.toFormat('yyyy/MM/dd')
+            let relativeStr = d.toRelative({base:startOfThis,unit:types})
+            var r = /\d+/;
+            const delta = parseInt(relativeStr.match(r),10)
+            if (d< startOfThis){
+              item.Relative = 0-delta
+            }
+            else {
+              item.Relative = delta
+            }
+            let semanticStr = d.toRelativeCalendar({base:startOfThis,unit:types})
+            item.Semantic = semanticStr;
+
+            switch (type){
+              case 'Day':
+                item.Number = d.ordinal
+                item.Name = d.toFormat('yyyy/MM/dd')
+              break
+              case 'Week':
+                item.Number = d.weekNumber
+                item.Name = d.weekYear + "W" + d.weekNumber.toString().padStart(2,'0')
+              break
+              case 'Month':
+                item.Number = d.month
+                item.Name = d.year + "M" + d.month.toString().padStart(2,'0') +  " " + d.monthShort + ""
+              break
+              case 'Quarter':
+                item.Number = d.quarter
+                item.Name = d.year + "Q" + d.quarter
+              break
+              case 'Year':
+                item.Number = d.year
+                item.Name = d.year.toString();
+              break
+              default:
+            }
+
+            if (Math.abs(delta)<=1){
+              item.Name = item.Name  + " (" + item.Semantic + ")"
+            }
+
+            function isInType(arrayOfTypes,arrayToFill,interval) {
+              let matchType = arrayOfTypes.pop()
+              if (type !== matchType) {
+                let matchS = Interval.fromDateTimes(interval.start.startOf(matchType),interval.start.endOf(matchType)).toFormat('yyyy/MM/dd');
+                if(arrayToFill.indexOf(matchS) === -1) {
+                  arrayToFill.push(matchS);
+                }
+                let matchE = Interval.fromDateTimes(interval.end.startOf(matchType),interval.end.endOf(matchType)).toFormat('yyyy/MM/dd');
+
+                if(arrayToFill.indexOf(matchE) === -1) {
+                  arrayToFill.push(matchE);
+                } 
+
+                if(arrayOfTypes.length >0) {
+                isInType(arrayOfTypes,arrayToFill,interval)
+              }
+              }
+              return arrayToFill
+            }
+
+            const matchTypes = ['Week','Month','Quarter','Year']
+
+            let matchingTypes = [...choices];
+            matchingTypes.shift();
+
+            let isIn = []
+
+            item.IsIn = isInType(matchingTypes,isIn,i);
+
+            item.ID = item.Dates;
+            item.Previous = prevID;
+            prevID = item.ID
+
+            items.push(item)
+
+            d = d.plus({[types]:1})
+            i = Interval.fromDateTimes(d,d.endOf(type))
+          }
+        });
+
         return res.json({items});
     }
 }));
