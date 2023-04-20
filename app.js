@@ -72,7 +72,7 @@ function getTitle(name) {
 }
 
 app.post(`/api/v1/synchronizer/datalist`, wrap(async (req, res) => {
-    const timezones = Intl.supportedValuesOf('timeZone');
+    const timezones = (Intl as any).supportedValuesOf('timeZone');
     
     /*
     let tzs = spacetime().timezones;
