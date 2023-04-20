@@ -22,5 +22,6 @@
             "name": "Dates",
             "type": "text",
             "subType": "date-range"
+        }
     }
 }
