@@ -183,7 +183,11 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             i = Interval.fromDateTimes(d,d.endOf(type))
           }
         });
-
+        
+        let dummyName = "Hello";
+        
+        items = [{id:uuid(JSON.stringify(dummyName)),name:dummyName}]
+        
         return res.json({items});
     }
 }));
