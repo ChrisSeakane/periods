@@ -194,7 +194,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             prevID = item.id
               
             item.scratch1 = item.id;
-            item.scratch2 = i.start.toFormat('yyyy/MM/dd') + " - " + i.end.plus({'days':1}).toFormat('yyyy/MM/dd');
+            item.scratch2 = timezone;
             
             const dates = {start:"2023-01-01",end:"2023-01-02"};
               item.dates = JSON.stringify(dates);
