@@ -38,7 +38,7 @@
             "name": "Previous ",
             "type": "text",
             "relation": {
-                "cardinality": "one-to-one",
+                "cardinality": "many-to-one",
                 "name": "Preivous",
                 "targetName": "Subsequent",
                 "targetType": "period",
