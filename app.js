@@ -141,7 +141,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             }
 
             if (Math.abs(delta)<=1){
-              item.name = item.name  + " (" + item.Semantic + ")"
+              item.name = item.name  + " (" + item.semantic + ")"
             }
 
             function isInType(arrayOfTypes,arrayToFill,interval) {
