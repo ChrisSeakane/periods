@@ -117,9 +117,10 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         //let e = DateTime.fromFormat(end, 'yyyy/MM/dd');
         //const n = DateTime.local({zone:timezone});
         
-        let s = DateTime.fromFormat(start, 'yyyy/MM/dd').setZone(timezone);
-        //console.log(s)
-        let e = DateTime.fromFormat(end, 'yyyy/MM/dd').setZone(timezone);
+        let s = DateTime.local(yearRange[0],1,1,{zone:timezone});        
+        //let s = DateTime.fromFormat(start, 'yyyy/MM/dd').setZone(timezone);
+        let e = DateTime.local(yearRange[1],12/31,{zone:timezone});
+        //let e = DateTime.fromFormat(end, 'yyyy/MM/dd').setZone(timezone);
         const n = DateTime.local({zone:timezone});
 
         const choices = ['Day','Week','Month','Quarter','Year']
