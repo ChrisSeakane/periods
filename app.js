@@ -75,7 +75,7 @@ function getTitle(name) {
 app.post(`/api/v1/synchronizer/datalist`, wrap(async (req, res) => {
     
     const {types, account, field, dependsOn} = req.body;
-    console.log("FIELD: " + field)
+    //console.log("FIELD: " + field)
     
     if (field == 'timezone') {
         let tzs = spacetime().timezones;
@@ -98,25 +98,13 @@ app.post(`/api/v1/synchronizer/datalist`, wrap(async (req, res) => {
     }
 }));
 
-/*
-app.post(`/api/v1/synchronizer/langlist`, wrap(async (req, res) => {
-
-    const ISO6391 = require('iso-639-1');
-    const names = ISO6391.getAllNativeNames();
-    const langList = names.map((l) => ({title:l,value:ISO6391.getCode(l)}))
-    
-    res.json({langList});
-}));
-*/
-
 app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     const {requestedType, filter} = req.body;
     if (requestedType !== `period`) {
         throw new Error(`Only this database can be synchronized`);
     }
     const {timezone, language} = filter;
-    const yearRange = getYearRange(filter);
-    //var linkID;    
+    const yearRange = getYearRange(filter); 
 
     if (requestedType == `period`){
         //const timezone = 'Europe/Copenhagen'
@@ -231,8 +219,10 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             item.previous = prevID;
             prevID = item.id
             
-            item.scratch1 = timezone;
-            item.scratch2 = language;
+            item.scratch1 = end;
+            const endDate = e.plus({[types]:1}).toFormat('yyyy/MM/dd')
+              
+            item.scratch2 = endDate;
               
             items.push(item)
 
