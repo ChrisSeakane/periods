@@ -76,7 +76,7 @@ app.post(`/api/v1/synchronizer/datalist`, wrap(async (req, res) => {
     const {types, account, field, dependsOn} = req.body;
     console.log("FIELD: " + field)
     
-    if (field = 'timezone') {
+    if (field == 'timezone') {
         let tzs = spacetime().timezones;
         let temp = Object.keys(tzs);
         temp = temp.map(getTitle)
@@ -88,7 +88,7 @@ app.post(`/api/v1/synchronizer/datalist`, wrap(async (req, res) => {
         */
         res.json({items});
     }
-    if (field = 'language') {
+    if (field == 'language') {
         const ISO6391 = require('iso-639-1');
         const names = ISO6391.getAllNativeNames();
         const items = names.map((l) => ({title:l,value:ISO6391.getCode(l)}))
