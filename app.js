@@ -9,6 +9,7 @@ const spacetime = require(`spacetime`);
 const { DateTime, Interval } = require("luxon");
 const ISO6391 = require('iso-639-1');
 
+/*
 const getYearRange = filter => {
     let fromYear = parseInt(filter.from);
     let toYear = parseInt(filter.to);
@@ -26,8 +27,9 @@ const getYearRange = filter => {
     }
     return yearRange;
 };
+*/
 
-const yearRange = filter => {
+const getYearRange = filter => {
     let fromYear = parseInt(filter.from);
     let toYear = parseInt(filter.to);
 
@@ -222,7 +224,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             item.scratch1 = end;
             const endDate = e.plus({[types]:1}).toFormat('yyyy/MM/dd')
               
-            item.scratch2 = endDate;
+            item.scratch2 = yearRange;
               
             items.push(item)
 
