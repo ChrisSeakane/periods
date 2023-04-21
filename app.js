@@ -84,6 +84,19 @@ app.post(`/api/v1/synchronizer/datalist`, wrap(async (req, res) => {
     }
 }));
 
+function customSort(array) {
+
+  array  = array.sort(function(a,b){
+    return (a.length < b.length) ? -1 : (a.length > b.length) ? 1 : 0;
+  });
+
+  var yearIndex = array.indexOf('Year');
+  if (yearIndex > -1)
+    array.unshift(array.splice(yearIndex, 1)[0]);
+
+  return array;
+}
+
 app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     const {requestedType, filter} = req.body;
     if (requestedType !== `period`) {
@@ -109,7 +122,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         const n = DateTime.local({zone:timezone});
 
         //const choices = ['Day','Week','Month','Quarter','Year']
-        const choices = types;
+        const choices = customSort(types);
 
         let items = []
 
