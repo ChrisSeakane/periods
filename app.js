@@ -222,9 +222,9 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             item.previous = prevID;
             prevID = item.id
             
-            item.scratch1 = timezone;
+            item.scratch1 = d.zoneName;
                           
-            item.scratch2 = language;
+            item.scratch2 = d.locale;
               
             items.push(item)
 
