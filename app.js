@@ -72,13 +72,12 @@ function getTitle(name) {
 }
 
 app.post(`/api/v1/synchronizer/datalist`, wrap(async (req, res) => {
-
+    
+    console.log(req);
     let tzs = spacetime().timezones;
     
     let temp = Object.keys(tzs);
-    console.log(temp)
     temp = temp.map(getTitle)
-    console.log(temp);
     const items = temp.sort((a, b) => (a.title > b.title) ? 1: -1);
     
     /*
