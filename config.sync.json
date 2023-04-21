@@ -14,6 +14,13 @@
       "type": "list"
     },
     {
+      "id": "language",
+      "title": "Language (default:English)",
+      "datalist": true,
+      "optional": true,
+      "type": "list"
+    },
+    {
       "id": "from",
       "type": "number",
       "title": "Start Year (default: current year)",
