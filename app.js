@@ -79,7 +79,7 @@ app.post(`/api/v1/synchronizer/datalist`, wrap(async (req, res) => {
         res.json({items});
     }
     if (field == 'types') {
-        const items = [{title:"Days",value:"Day","order":1},{title:"Weeks",value:"Week","order":2},{title:"Months",value:"Month","order":3},{title:"Quarters",value:"Quarter","order":4},{title:"Years",value:"Year","order":5}];
+        const items = [{title:"Days",value:"Day"},{title:"Weeks",value:"Week"},{title:"Months",value:"Month"},{title:"Quarters",value:"Quarter"},{title:"Years",value:"Year"}];
         res.json({items});
     }
 }));
@@ -92,7 +92,7 @@ function customSort(array) {
 
   var yearIndex = array.indexOf('Year');
   if (yearIndex > -1)
-    array.unshift(array.splice(yearIndex, 1)[0]);
+    array.push(array.splice(yearIndex, 1)[0]);
 
   return array;
 }
