@@ -111,13 +111,17 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     if (requestedType == `period`){
         //const timezone = 'Europe/Copenhagen'
         const lang = language
-        const start = yearRange[0] + '/01/01 00:00'
-        const end = yearRange[1] + '/12/31 23:59'
+        const start = yearRange[0] + '/01/01'
+        const end = yearRange[1] + '/12/31'
         
         //let s = DateTime.local(yearRange[0],1,1,{zone:timezone});        
-        let s = DateTime.fromFormat(start, 'yyyy/MM/dd HH:mm').setZone(timezone, {keepLocalTime:true});
+        let s = DateTime.fromFormat(start, 'yyyy/MM/dd')
+        s = s.startOf('day');
+        s = s.setZone(timezone, {keepLocalTime:true});
         //let e = DateTime.local(yearRange[1],12/31,{zone:timezone});
-        let e = DateTime.fromFormat(end, 'yyyy/MM/dd HH:mm').setZone(timezone, {keepLocalTime:true});
+        let e = DateTime.fromFormat(end, 'yyyy/MM/dd')
+        e = e.startOf('day');
+        e = e.setZone(timezone, {keepLocalTime:true});
         const n = DateTime.local({zone:timezone});
 
         const choices = ['Day','Week','Month','Quarter','Year']
