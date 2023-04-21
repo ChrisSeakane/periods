@@ -90,6 +90,23 @@ app.post(`/api/v1/synchronizer/datalist`, wrap(async (req, res) => {
     res.json({items});
 }));
 
+
+/*
+
+
+app.post(`/api/v1/synchronizer/langlist`, wrap(async (req, res) => {
+
+    const ISO6391 = require('iso-639-1');
+    const names = ISO6391.getAllNativeNames();
+    const langList = names.map((l) => ({title:l,value:ISO6391.getCode(l)}))
+    
+    res.json({langList});
+}));
+
+
+*/
+
+
 app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     const {requestedType, filter} = req.body;
     if (requestedType !== `period`) {
