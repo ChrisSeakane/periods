@@ -75,7 +75,10 @@ app.post(`/api/v1/synchronizer/datalist`, wrap(async (req, res) => {
     
     const {types, account, field, dependsOn} = req.body;
     
-    console.log(types, account, field, dependsOn)
+    console.log("TYPES: " + types)
+    console.log("ACCOUNT: " + account)
+    console.log("FIELD: " + field)
+    console.log("DEPENDS ON: " + dependsOn)
     
     let tzs = spacetime().timezones;
     
