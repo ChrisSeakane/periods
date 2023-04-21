@@ -73,7 +73,7 @@ function getTitle(name) {
 
 app.post(`/api/v1/synchronizer/datalist`, wrap(async (req, res) => {
     
-    cconst {types, account, field, dependsOn} = req.body;
+    const {types, account, field, dependsOn} = req.body;
     
     console.log(types, account, field, dependsOn)
     
