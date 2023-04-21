@@ -9,26 +9,6 @@ const spacetime = require(`spacetime`);
 const { DateTime, Interval } = require("luxon");
 const ISO6391 = require('iso-639-1');
 
-/*
-const getYearRange = filter => {
-    let fromYear = parseInt(filter.from);
-    let toYear = parseInt(filter.to);
-
-    if (_.isNaN(fromYear)) {
-        fromYear = new Date().getFullYear();
-    }
-    if (_.isNaN(toYear)) {
-        toYear = new Date().getFullYear();
-    }
-    const yearRange = [];
-    while(fromYear <= toYear) {
-        yearRange.push(fromYear);
-        fromYear++;
-    }
-    return yearRange;
-};
-*/
-
 const getYearRange = filter => {
     let fromYear = parseInt(filter.from);
     let toYear = parseInt(filter.to);
@@ -96,6 +76,10 @@ app.post(`/api/v1/synchronizer/datalist`, wrap(async (req, res) => {
         const names = ISO6391.getAllNativeNames();
         const items = names.map((l) => ({title:l,value:ISO6391.getCode(l)}))
 
+        res.json({items});
+    }
+    if (field == 'types') {
+        const items = [{title:"Days",value:"Day"},{title:"Weeks",value:"Week"},{title:"Months",value:"Month"},{title:"Quarters",value:"Quarter"},{title:"Years",value:"Year"}];
         res.json({items});
     }
 }));
