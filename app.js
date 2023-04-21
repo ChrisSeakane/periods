@@ -74,31 +74,30 @@ function getTitle(name) {
 app.post(`/api/v1/synchronizer/datalist`, wrap(async (req, res) => {
     
     const {types, account, field, dependsOn} = req.body;
-    
-    console.log("TYPES: " + types)
-    console.log("ACCOUNT: " + account)
     console.log("FIELD: " + field)
-    console.log("DEPENDS ON: " + dependsOn)
     
-    let tzs = spacetime().timezones;
-    
-    let temp = Object.keys(tzs);
-    temp = temp.map(getTitle)
-    const items = temp.sort((a, b) => (a.title > b.title) ? 1: -1);
-    
-    /*
-    // not working, don't know why
-    const timezones = Intl.supportedValuesOf('timeZone');
-    const items = timezones.map((tz) => ({title:tz, value:tz}));
-    */
-    
-    res.json({items});
+    if (field = 'timezone') {
+        let tzs = spacetime().timezones;
+        let temp = Object.keys(tzs);
+        temp = temp.map(getTitle)
+        const items = temp.sort((a, b) => (a.title > b.title) ? 1: -1);
+        /*
+        // not working, don't know why
+        const timezones = Intl.supportedValuesOf('timeZone');
+        const items = timezones.map((tz) => ({title:tz, value:tz}));
+        */
+        res.json({items});
+    }
+    if (field = 'language') {
+        const ISO6391 = require('iso-639-1');
+        const names = ISO6391.getAllNativeNames();
+        const items = names.map((l) => ({title:l,value:ISO6391.getCode(l)}))
+
+        res.json({items});
+    }
 }));
 
-
 /*
-
-
 app.post(`/api/v1/synchronizer/langlist`, wrap(async (req, res) => {
 
     const ISO6391 = require('iso-639-1');
@@ -107,10 +106,7 @@ app.post(`/api/v1/synchronizer/langlist`, wrap(async (req, res) => {
     
     res.json({langList});
 }));
-
-
 */
-
 
 app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     const {requestedType, filter} = req.body;
