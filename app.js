@@ -57,7 +57,6 @@ function getTitle(name) {
 app.post(`/api/v1/synchronizer/datalist`, wrap(async (req, res) => {
     
     const {types, account, field, dependsOn} = req.body;
-    //console.log("FIELD: " + field)
     
     if (field == 'timezone') {
         let tzs = spacetime().timezones;
@@ -106,12 +105,11 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     const yearRange = getYearRange(filter); 
 
     if (requestedType == `period`){
-        //const timezone = 'Europe/Copenhagen'
+
         const lang = language
         const start = yearRange[0] + '/01/01'
         const end = yearRange[1] + '/12/31'
-        
-        //let s = DateTime.local(yearRange[0],1,1,{zone:timezone});        
+             
         let s = DateTime.fromFormat(start, 'yyyy/MM/dd')
         s = s.startOf('day');
         s = s.setZone(timezone, {keepLocalTime:true});
@@ -121,18 +119,16 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         e = e.setZone(timezone, {keepLocalTime:true});
         const n = DateTime.local({zone:timezone});
 
-        //const choices = ['Day','Week','Month','Quarter','Year']
         const choices = customSort(types);
 
         let items = []
 
         choices.forEach((type) => {
-          //const type = 'Day';
+
           const types = type.toLowerCase() + 's'
           let d = s.startOf(type).setLocale(lang)
           const startOfThis = n.startOf(type);
-             
-          //console.log(d)
+
           let i = Interval.fromDateTimes(d,d.endOf(type))
 
           let prevID = ''
@@ -145,8 +141,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             
             const dates = {start:i.start.toFormat('yyyy-MM-dd'),end:i.end.plus({'days':1}).toFormat('yyyy-MM-dd')};
             item.dates = JSON.stringify(dates);
-              
-            //item.dates = i.start.toFormat('yyyy/MM/dd') + " - " + i.end.plus({'days':1}).toFormat('yyyy/MM/dd')
+            
             let relativeStr = d.toRelative({base:startOfThis,unit:types})
             var r = /\d+/;
             const delta = parseInt(relativeStr.match(r),10)
@@ -207,22 +202,21 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
               return arrayToFill
             }
 
-            const matchTypes = ['Week','Month','Quarter','Year']
-
             let matchingTypes = [...choices];
             matchingTypes.shift();
 
             let isIn = []
 
-            item.is_in = isInType(matchingTypes,isIn,i);
+            if (matchingTypes.length > 0) {
+                item.is_in = isInType(matchingTypes,isIn,i);
+            }
 
             item.id = uuid(JSON.stringify(i.toFormat('yyyy/MM/dd')));
-            item.previous = prevID;
-            prevID = item.id
+            //item.previous = prevID;
+            //prevID = item.id
             
-            item.scratch1 = choices.map((t) => t.order);;
-                          
-            item.scratch2 = choices;
+            //item.scratch1 = choices.map((t) => t.order);;
+            //item.scratch2 = choices;
               
             items.push(item)
 
