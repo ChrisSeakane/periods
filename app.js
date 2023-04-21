@@ -139,7 +139,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
 
           const endDate = e.plus({[types]:1});
           
-          while(i.isBefore(endDate){
+          while(i.isBefore(endDate)){
             let item ={}
             item.type = type
             
