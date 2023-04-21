@@ -73,7 +73,10 @@ function getTitle(name) {
 
 app.post(`/api/v1/synchronizer/datalist`, wrap(async (req, res) => {
     
-    console.log(req);
+    cconst {types, account, field, dependsOn} = req.body;
+    
+    console.log(types, account, field, dependsOn)
+    
     let tzs = spacetime().timezones;
     
     let temp = Object.keys(tzs);
