@@ -220,7 +220,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             item.previous = prevID;
             prevID = item.id
             
-            item.scratch1 = s..toFormat('yyyy/MM/dd HH:MM') + " - " + e.toFormat('yyyy/MM/dd HH:MM');
+            item.scratch1 = s.toFormat('yyyy/MM/dd HH:MM') + " - " + e.toFormat('yyyy/MM/dd HH:MM');
                           
             item.scratch2 = type + " " + endDate.toFormat('yyyy/MM/dd HH:MM');
               
