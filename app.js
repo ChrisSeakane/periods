@@ -114,13 +114,13 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     if (requestedType !== `period`) {
         throw new Error(`Only this database can be synchronized`);
     }
-    const {timezone} = filter;
+    const {timezone, language} = filter;
     const yearRange = getYearRange(filter);
     //var linkID;    
 
     if (requestedType == `period`){
         //const timezone = 'Europe/Copenhagen'
-        const lang = 'fr'
+        const lang = language
         const start = yearRange[0] + '/01/01'
         const end = yearRange[0] + '/12/31'
         //let s = DateTime.fromFormat(start, 'yyyy/MM/dd');
@@ -231,8 +231,8 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             item.previous = prevID;
             prevID = item.id
             
-            item.scratch1 = item.id;
-            item.scratch2 = n.toFormat("yyyy/MM/dd hh:mm") + " " + startOfThis.toFormat("yyyy/MM/dd hh:mm");
+            item.scratch1 = timezone;
+            item.scratch2 = language;
               
             items.push(item)
 
