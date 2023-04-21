@@ -132,26 +132,25 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
           let d = s.startOf(type).setLocale(lang)
           const startOfThis = n.startOf(type);
              
-            
           //console.log(d)
           let i = Interval.fromDateTimes(d,d.endOf(type))
 
           let prevID = ''
 
-          while(i.isBefore(e.plus({[types]:1}))){
+          const endDate = e.plus({[types]:1});
+          
+          while(i.isBefore(endDate){
             let item ={}
             item.type = type
             
             const dates = {start:i.start.toFormat('yyyy-MM-dd'),end:i.end.plus({'days':1}).toFormat('yyyy-MM-dd')};
             item.dates = JSON.stringify(dates);
               
-              
-              
             //item.dates = i.start.toFormat('yyyy/MM/dd') + " - " + i.end.plus({'days':1}).toFormat('yyyy/MM/dd')
             let relativeStr = d.toRelative({base:startOfThis,unit:types})
             var r = /\d+/;
             const delta = parseInt(relativeStr.match(r),10)
-            if (d< startOfThis){
+            if (d < startOfThis){
               item.relative = 0-delta
             }
             else {
@@ -221,9 +220,8 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             item.previous = prevID;
             prevID = item.id
             
-            item.scratch1 = end;
-            const endDate = e.plus({[types]:1}).toFormat('yyyy/MM/dd')
-              
+            item.scratch1 = endDate.toFormat('yyyy/MM/dd');
+                          
             item.scratch2 = yearRange;
               
             items.push(item)
