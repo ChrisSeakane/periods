@@ -79,7 +79,7 @@ app.post(`/api/v1/synchronizer/datalist`, wrap(async (req, res) => {
         res.json({items});
     }
     if (field == 'types') {
-        const items = [{title:"Days",value:"Day"},{title:"Weeks",value:"Week"},{title:"Months",value:"Month"},{title:"Quarters",value:"Quarter"},{title:"Years",value:"Year"}];
+        const items = [{title:"Days",value:"Day","order":1},{title:"Weeks",value:"Week","order":2},{title:"Months",value:"Month","order":3},{title:"Quarters",value:"Quarter","order":4},{title:"Years",value:"Year","order":5}];
         res.json({items});
     }
 }));
@@ -207,9 +207,9 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             item.previous = prevID;
             prevID = item.id
             
-            item.scratch1 = choices;
+            item.scratch1 = choices.map((t) => t.order);;
                           
-            item.scratch2 = d.locale;
+            item.scratch2 = choices;
               
             items.push(item)
 
