@@ -89,7 +89,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
     if (requestedType !== `period`) {
         throw new Error(`Only this database can be synchronized`);
     }
-    const {timezone, language} = filter;
+    const {timezone, language, types} = filter;
     const yearRange = getYearRange(filter); 
 
     if (requestedType == `period`){
@@ -108,7 +108,8 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
         e = e.setZone(timezone, {keepLocalTime:true});
         const n = DateTime.local({zone:timezone});
 
-        const choices = ['Day','Week','Month','Quarter','Year']
+        //const choices = ['Day','Week','Month','Quarter','Year']
+        const choices = types;
 
         let items = []
 
@@ -206,7 +207,7 @@ app.post(`/api/v1/synchronizer/data`, wrap(async (req, res) => {
             item.previous = prevID;
             prevID = item.id
             
-            item.scratch1 = d.zoneName;
+            item.scratch1 = choices;
                           
             item.scratch2 = d.locale;
               
